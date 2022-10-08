@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">Twitch-stream</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #content {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0px;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <iframe width="100%" height="100%" frameborder="0" src="" id="iframe"></iframe>
+    </div>
+
+    <script>
+        var value = new URL(window.location.href).searchParams.get('v');
+        if (!value) { value = '0'; }
+
+        const ws = new WebSocket("ws://localhost:2223");
+		const parent = "localhost";
+        let playerTwitch = "";
+
+        ws.onmessage = async function(event) {
+				jsonObj = JSON.parse(event.data);
+            if (jsonObj.Type == 5) {
+                if (jsonObj.command == "createUsers") {
+                    if (playerTwitch != jsonObj.TwitchIds[value]) {
+                    let iframe = document.getElementById('iframe');
+                    iframe.src = "https://player.twitch.tv/?channel="+jsonObj.TwitchIds[value]+"&height=1080&parent="+parent+"&scrolling&width=1920";
+                    playerTwitch = jsonObj.TwitchIds[value];
+                    }
+                }
+                if (jsonObj.command == "resetOverlay") {
+                    let iframe = document.getElementById('iframe');
+                    iframe.src = "";
+                    playerTwitch = "";
+                }
+            }
+		};
+    </script>
+</body>
+
+</html>

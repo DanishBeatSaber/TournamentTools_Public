@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+    <title>P&amp;B</title>    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="./js/logic.js"></script>
+  </head>
+  <body>
+    <div class="MainClass">
+      <div class="PlayerContainers">
+        <div class="Player1Container" id="Player1Container">
+          <div class="Player1Class" id="Player1Class">
+            <img src="./images/Placeholder.png" class="Player1Image" id="Player1Image">
+            <span class="Player1Name" id="Player1Name"></span>
+            <span class="Player1Rank" id="Player1Rank"></span>
+          </div>
+        </div>
+      
+        <div class="Player2Container" id="Player2Container">
+          <div class="Player2Class" id="Player2Class">
+              <img src="./images/Placeholder.png" class="Player2Image" id="Player2Image">
+              <span class="Player2Name" id="Player2Name"></span>
+              <span class="Player2Rank" id="Player2Rank"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="WrapperTemplate" style="display: none">
+      <div class="SongBox" id="SongBox">
+        <div class="SongCard" id="SongCard">
+          <div class="SongCover" id="SongCover" style="background: url(&quot;https://eu.cdn.beatsaver.com/43304202ec7681e52b4026313c7ab9099be2890d.jpg&quot;) 0% 0% / cover;"></div>
+          <div class="SongInfo" id="SongInfo"></div>
+          <div class="DiffTag" id="DiffTag" style="background: rgb(0, 128, 85);"></div>
+          <span class="DiffText" id="DiffText"></span>
+          <span class="SongArtist" id="SongArtist"></span>
+          <span class="SongTitle" id="SongTitle"></span>
+          <span class="SongMapper" id="SongMapper"></span>
+          <span class="SongKey" id="SongKey"></span>
+          <span class="SongLength" id="SongLength"></span>
+          <span class="SongPick" id="SongPick"></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="Songs" style="opacity: 0;margin-top: 30%;top: 50%;left: 50%;transform: translate(0%, -53%);"></div>
+    
+  </body>
+</html>

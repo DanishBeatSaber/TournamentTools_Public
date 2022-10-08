@@ -1,0 +1,98 @@
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Roboto, monospace;
+    }
+
+    body {
+      font-size: 14px;
+      overflow: hidden;
+    }
+
+    #CountdownDiv {
+      text-align: center;
+      padding: 0% 42%;
+      margin-top: 20%;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .CountdownClock {
+      color: rgba(255, 255, 255, 1);
+      text-shadow: 0px 0px 13px rgba(0, 0, 0, 1);
+      font-family: Roboto, monospace;
+      font-size: 128px;
+      font-weight: 800;
+      transition: opacity 0.5s ease-in-out;
+      padding-top: 25%;
+    }
+
+    .CountdownBar {
+      box-shadow: 1px 1px 13px rgb(0 0 0);
+      max-width: 100%;
+      width: 100%;
+      height: 10px;
+      background-color: white;
+      transition: width 0.6s ease-in-out;
+      border-radius: 41px;
+      margin-top: -100px;
+      margin-left: 53%;
+      transform: translate(-50%, -50%);
+    }
+  </style>>
+  <title>Countdown</title>
+</head>
+
+<body>
+  <div id="CountDownDiv">
+    <p class="CountdownClock" style="opacity:0"></p>
+    <div class="CountdownBar" style="width: 0%;"></div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script>
+    setTimeout(function() {
+    function setCountdown() {
+      $.get("./Timer.txt", function (data) {
+        if (data != $(".CountdownClock").text()) {
+          $(".CountdownClock").text(data);
+        }
+      });
+    } setCountdown();
+      $(".CountdownBar").css("width", "100%");
+      $(".CountdownClock").css("opacity", "1");
+    }, 200);
+
+    $(document).ready(function () {
+      $(".CountdownClock").click(function () {
+        var time = $(this).text();
+        var timeArray = time.split(":");
+        var minutes = parseInt(timeArray[0]);
+        var seconds = parseInt(timeArray[1]);
+        var timeLeft = minutes * 60 + seconds;
+
+        var interval = setInterval(function () {
+          timeLeft--;
+          var minutes = Math.floor(timeLeft / 60);
+          var seconds = timeLeft - minutes * 60;
+          if (seconds < 10) {
+            seconds = "0" + seconds;
+          }
+          $(".CountdownClock").text(minutes + ":" + seconds);
+          if (timeLeft <= 0) {
+            clearInterval(interval);
+            $(".CountdownClock").css("opacity", "0");
+          }
+
+          var timeTotal = 15 * 60;
+          var width = (timeLeft / timeTotal) * 100;
+          $(".CountdownBar").css("width", width - 1 + "%");
+        }, 1000);
+      });
+    });
+  </script>
+</body>
+
+</html>
